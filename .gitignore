@@ -16,3 +16,4 @@
 # common
 *.env
 *tmp
+*logs
