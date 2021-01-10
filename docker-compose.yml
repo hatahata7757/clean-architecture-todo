@@ -1,0 +1,11 @@
+version: '3'
+services:
+  api:
+    build: ./docker/api
+    ports:
+      - ${API_PORT}:8080
+    volumes:
+      - ./api:/go/src/api
+    command: air
+    tty:
+      true
