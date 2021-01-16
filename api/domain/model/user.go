@@ -2,7 +2,7 @@ package model
 
 import "time"
 
-// User は単一ユーザーの型
+// User structure is a type that handles a single user
 type User struct {
 	ID        int       `json:"id"`
 	Name      string    `json:"name"`
@@ -10,7 +10,7 @@ type User struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// Users は複数のユーザーを扱う型
+// Users structure is a type that handles multiple users
 type Users []User
 
 // NewUser is a method that returns a User instance
