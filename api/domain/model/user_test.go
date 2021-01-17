@@ -2,24 +2,40 @@ package model
 
 import (
 	"testing"
-	"time"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
-func TestUser(t *testing.T) {
-	var id int = 1
-	var name string = "anonymous"
-	var createdAt time.Time = time.Now()
-	var updatedAt time.Time = time.Now()
-	user := NewUser(id, name, createdAt, updatedAt)
-
-	if user == nil {
-		t.Errorf("failed NewUser()")
+func TestNewUser(t *testing.T) {
+	type args struct {
+		id   int
+		name string
 	}
-
-	assert.Equal(t, id, user.ID)
-	assert.Equal(t, name, user.Name)
-	assert.Equal(t, createdAt, user.CreatedAt)
-	assert.Equal(t, updatedAt, user.UpdatedAt)
+	tests := []struct {
+		name string
+		args args
+		want *User
+		opt  cmp.Option
+	}{
+		{
+			name: "return User struct",
+			args: args{
+				id:   1,
+				name: "anonymous",
+			},
+			want: &User{
+				ID:   1,
+				Name: "anonymous",
+			},
+			opt: cmpopts.IgnoreFields(User{}, "CreatedAt", "UpdatedAt"),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := NewUser(tt.args.id, tt.args.name); !cmp.Equal(got, tt.want, tt.opt) {
+				t.Errorf("NewUser() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }

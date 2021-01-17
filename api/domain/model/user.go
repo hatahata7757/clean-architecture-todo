@@ -10,15 +10,15 @@ type User struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// Users structure is a type that handles multiple users
+// Users slice is a type that handles multiple users
 type Users []User
 
 // NewUser is a method that returns a User instance
-func NewUser(id int, name string, createdAt time.Time, updatedAt time.Time) *User {
+func NewUser(id int, name string) *User {
 	return &User{
 		ID:        id,
 		Name:      name,
-		CreatedAt: createdAt,
-		UpdatedAt: updatedAt,
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
 	}
 }
