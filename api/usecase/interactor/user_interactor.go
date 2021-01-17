@@ -5,11 +5,12 @@ import (
 	"api/usecase/repository"
 )
 
+// UserInteractor is a type includes the usecase.repository.UserRepository
 type UserInteractor struct {
 	UserRepository repository.UserRepository
 }
 
-// Add は UserRepository を通して Store を実行するためのメソッドです。
+// Add method is an interactor for user registration
 func (interactor *UserInteractor) Add(u model.User) (user model.User, err error) {
 	user, err = interactor.UserRepository.Store(u)
 	if err != nil {
